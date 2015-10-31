@@ -1,0 +1,15 @@
+*.class
+*.kotlin_module
+
+# Package Files #
+*.jar
+*.war
+*.ear
+
+# Intellij project files
+*.iml
+*.ipr
+*.iws
+.idea/
+
+target/**
