@@ -1,10 +1,9 @@
 package common
 
-import java.io.FileReader
-import java.io.StreamTokenizer
-import java.util.StringTokenizer
 import java.io.BufferedReader
+import java.io.FileReader
 import java.io.PrintWriter
+import java.util.*
 
 class DataReader(private val reader: BufferedReader) {
     var st : StringTokenizer? = null
@@ -14,18 +13,14 @@ class DataReader(private val reader: BufferedReader) {
 
     fun next() : String? {
         while (st == null || !st!!.hasMoreTokens()) {
-            val s = reader.readLine()
-            if (s == null)
-                return null
+            val s = reader.readLine() ?: return null
             st = StringTokenizer(s)
         }
 
         return st?.nextToken()
     }
 
-    fun nextToken() : String {
-        return next()!!
-    }
+    fun nextToken() = next()!!
 
     fun nextInt() = nextToken().toInt()
     fun nextLong() = nextToken().toLong()
@@ -53,3 +48,15 @@ fun solveAll(input: String = "input.txt", output: String = "output.txt", solver:
             solver
     )
 }
+
+infix fun Int.ceilDiv(n: Int) = (this / n) + (if (this % n == 0) 0 else 1)
+@Suppress("NOTHING_TO_INLINE")
+inline fun Int.sign() =
+        when {
+            this > 0 -> 1
+            this < 0 -> -1
+            else -> 0
+        }
+
+@Suppress("NOTHING_TO_INLINE")
+inline fun Int.abs() = Math.abs(this)
