@@ -59,4 +59,40 @@ inline fun Int.sign() =
         }
 
 @Suppress("NOTHING_TO_INLINE")
+inline fun Long.sign() =
+        when {
+            this > 0 -> 1
+            this < 0 -> -1
+            else -> 0
+        }
+
+@Suppress("NOTHING_TO_INLINE")
 inline fun Int.abs() = Math.abs(this)
+
+
+data class Point(val x: Int, val y: Int) : Comparable<Point> {
+    override fun compareTo(other: Point): Int {
+        if (x != other.x) return x.compareTo(other.x)
+        return y.compareTo(other.y)
+    }
+
+    operator fun minus(other: Point) = Vector(x - other.x, y - other.y)
+    override fun toString() = "($x, $y)"
+
+    fun sqrDist(other: Point): Long {
+        val dx = (x - other.x).toLong()
+        val dy = (y - other.y).toLong()
+
+        return dx * dx + dy * dy
+    }
+
+    fun distance(it: Point): Double = Math.sqrt(Math.pow((it.x - x).toDouble(), 2.0) + Math.pow((it.y - y).toDouble(), 2.0))
+}
+
+data class Vector(val x: Int, val y: Int) {
+    fun crossProduct(other: Vector): Long = x.toLong() * other.y.toLong() - y.toLong() * other.x.toLong()
+    fun crossProductSign(other: Vector): Int = crossProduct(other).sign()
+}
+
+val Int.bitCount: Int get() = Integer.bitCount(this)
+fun Int.isSet(index: Int): Boolean = (this and (1 shl index)) != 0
