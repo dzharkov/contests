@@ -35,7 +35,7 @@ fun solveAll(reader: DataReader, writer: PrintWriter, solver: (DataReader) -> St
     val testsCount = reader.nextInt()
 
     for (test in 1..testsCount) {
-        writer.println("Case #${test}: ${solver(reader)}")
+        writer.println("Case #$test: ${solver(reader)}")
     }
 
     writer.close()
@@ -96,3 +96,5 @@ data class Vector(val x: Int, val y: Int) {
 
 val Int.bitCount: Int get() = Integer.bitCount(this)
 fun Int.isSet(index: Int): Boolean = (this and (1 shl index)) != 0
+
+fun Boolean.toInt() = if (this) 1 else 0
